@@ -29,6 +29,8 @@ Input x and n between 1-10
 **x** and **n** must both be between **1 and 10**
 ### Example Output
 ```
+Input t between 1-100
+1
 Test case 1
 Input x and n between 1-10
 5 4
