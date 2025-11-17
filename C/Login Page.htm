@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Page</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 350px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #4338ca;
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: -5px;
+      margin-bottom: 8px;
+    }
+
+    .forgot {
+      display: block;
+      text-align: right;
+      font-size: 13px;
+      color: #4f46e5;
+      margin-top: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .forgot-pass {
+      display: block;
+      text-align: center;
+      font-size: 18px;
+      color: #4f46e5;
+      margin-top: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .welcome {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .logout-btn {
+      margin-top: 20px;
+      background: #ef4444;
+    }
+
+    @media (max-width: 400px) {
+      .container {
+        padding: 30px 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="login-container">
+  <h2>Login</h2>
+
+  <input type="email" id="email" placeholder="Email" />
+  <p class="error" id="email-error"></p>
+
+  <input type="password" id="password" placeholder="Password" />
+  <p class="error" id="password-error"></p>
+
+  <button onclick="login()">Login</button>
+  <a class="forgot" onclick="forgot()">Forgot password?</a>
+</div>
+
+<div class="container" id="welcome-container" style="display: none;">
+  <p class="welcome" id="welcome-message"></p>
+  <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<div class="container" id="forgot-container" style="display: none;">
+  <p class="forgot-pass" id="forgot-message">test@example.com : Test@1234 example@test.com : Password@123</p>
+  <button class="logout-btn" onclick="back()">Back</button>
+</div>
+
+<script>
+  // Hardcoded valid credentials
+  const validUsers = {
+    "test@example.com": "Test@1234",
+    "example@test.com": "Password@123"
+  };
+
+  // Password validation regex:
+  // 8-16 chars, at least one uppercase, one lowercase, one number, one symbol
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/;
+
+  function login() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const emailError = document.getElementById("email-error");
+    const passwordError = document.getElementById("password-error");
+
+    emailError.textContent = "";
+    passwordError.textContent = "";
+
+    // Email validation
+    if (!email) {
+      emailError.textContent = "Email cannot be empty.";
+      return;
+    }
+    if (!validUsers[email]) {
+      emailError.textContent = "Email does not exist.";
+      return;
+    }
+
+    // Password validation
+    if (!passwordRegex.test(password)) {
+      passwordError.textContent =
+        "Password must be 8-16 chars with upper, lower, number, and symbol.";
+      return;
+    }
+
+    if (validUsers[email] !== password) {
+      passwordError.textContent = "Incorrect password.";
+      return;
+    }
+
+    // Successful login
+    document.getElementById("login-container").style.display = "none";
+    document.getElementById("welcome-container").style.display = "block";
+    document.getElementById("welcome-message").textContent =
+      `Welcome, ${email}!`;
+  }
+
+  function logout() {
+    document.getElementById("login-container").style.display = "block";
+    document.getElementById("welcome-container").style.display = "none";
+
+    // Reset inputs
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("email-error").textContent = "";
+    document.getElementById("password-error").textContent = "";
+  }
+  //Forgot password show hardcoded credentials 
+  function forgot() {
+    document.getElementById("login-container").style.display = "none";
+    document.getElementById("forgot-container").style.display = "block"; 
+  }
+  function back() {
+    document.getElementById("login-container").style.display = "block";
+    document.getElementById("forgot-container").style.display = "none";
+    // Reset inputs
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("email-error").textContent = "";
+    document.getElementById("password-error").textContent = "";
+
+  }
+</script>
+
+</body>
+</html>
