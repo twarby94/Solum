@@ -34,5 +34,5 @@ Input t between 1-1000
 Test case 1
 Input n between 1-10^18
 24
-Min: 2 Max: 6
+Min: 4 Max: 6
 ```
