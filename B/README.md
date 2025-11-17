@@ -29,6 +29,8 @@ Input n between 1-10^18
 **n** must be between **1 and 10^18**
 ### Example Output
 ```
+Input t between 1-1000
+1
 Test case 1
 Input n between 1-10^18
 24
