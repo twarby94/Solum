@@ -6,7 +6,7 @@ This project is a responsive and interactive Login Page built using HTML, CSS, a
 ## Hardcoded Credentials
 | Email                                       | Password     |
 | ------------------------------------------- | ------------ |
-| [test@example.com](mailto:test@example.com) | Test@1234    |
-| [example@test.com](mailto:example@test.com) | Password@123 |
+| test@example.com | Test@1234    |
+| example@test.com | Password@123 |
 
 These credentials can be seen on the “forgot password” screen.
